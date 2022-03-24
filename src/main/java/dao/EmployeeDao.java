@@ -62,7 +62,7 @@ public class EmployeeDao {
         }
     }
 
-    private static int pageSize = 3;
+    private static final int pageSize = 3;
 
     public List<Employee> getAllEmployee( int pageNumber) {
 

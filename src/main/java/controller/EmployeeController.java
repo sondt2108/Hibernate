@@ -88,6 +88,9 @@ public class EmployeeController extends HttpServlet {
                     }
                     response.sendRedirect(request.getContextPath() + "/list-employee");
                     break;
+                case "detail":
+                    System.out.println("Detail");
+                    break;
             }
         }
     }
