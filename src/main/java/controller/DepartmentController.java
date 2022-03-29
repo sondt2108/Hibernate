@@ -1,6 +1,8 @@
 package controller;
 
 import models.Department;
+
+import org.apache.logging.log4j.Logger;
 import service.DepartmentService;
 
 import javax.servlet.RequestDispatcher;
@@ -14,7 +16,6 @@ import java.util.List;
 
 @WebServlet(urlPatterns = "/list-department")
 public class DepartmentController extends HttpServlet {
-
     private DepartmentService departmentService;
 
     public DepartmentController(){

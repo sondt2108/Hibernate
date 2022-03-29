@@ -2,8 +2,11 @@ package controller;
 
 import models.Department;
 import models.Employee;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import service.DepartmentService;
 import service.EmployeeService;
+import util.Log;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +16,8 @@ import java.util.List;
 
 @WebServlet(urlPatterns = "/list-employee")
 public class EmployeeController extends HttpServlet {
+
+    private  static  final Logger logger = LogManager.getLogger(EmployeeController.class.getName());
 
     private EmployeeService employeeService;
 
@@ -41,7 +46,7 @@ public class EmployeeController extends HttpServlet {
             request.setAttribute("currentPage", currentPage);
         }
 
-
+        logger.info("helle log4j");
         List<Department> departments = departmentService.getAllDepartment();
         request.setAttribute("dept", departments);
 
@@ -49,6 +54,8 @@ public class EmployeeController extends HttpServlet {
         if (id != null) {
             request.setAttribute("detailEmployee", employeeService.getEmployeeById(Integer.parseInt(id)));
         }
+
+
         RequestDispatcher rd = request.getRequestDispatcher("./views/employee.jsp");
         rd.forward(request, response);
     }

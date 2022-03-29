@@ -1,6 +1,9 @@
 package dao;
 
 import models.Employee;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -10,6 +13,8 @@ import util.HibernateUtil;
 import java.util.List;
 
 public class EmployeeDao {
+
+   private static final Logger logger = LogManager.getLogger(EmployeeDao.class.getName());
     public void create(Employee employee) {
         Transaction tx = null;
         //Get the session object.
@@ -23,16 +28,12 @@ public class EmployeeDao {
 
             //Commit hibernate transaction if no exception occurs.
             tx.commit();
-            System.out.println("Saved Successfully.");
         } catch (HibernateException e) {
             if (tx != null) {
                 //Roll back if any exception occurs.
                 tx.rollback();
             }
             e.printStackTrace();
-        } finally {
-            //Close hibernate session.
-            session.close();
         }
     }
 
@@ -56,9 +57,6 @@ public class EmployeeDao {
                 tx.rollback();
             }
             e.printStackTrace();
-        } finally {
-            //Close hibernate session.
-            session.close();
         }
     }
 
@@ -135,27 +133,11 @@ public class EmployeeDao {
     }
 
     public static void main(String[] args) {
-        Transaction transaction = null;
-        List<Employee> listOfEmployee = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            // start a transaction
-            transaction = session.beginTransaction();
-            // get an employee object
+        logger.error("hahahahahahah");
+        logger.debug("debug sdfsd");
+        logger.info("info fsdkfbsdkf");
+        logger.warn("warn sdjbfsjdfb");
+        logger.fatal("fata sdfhksdfh");
 
-            Query query = session.createQuery("from Employee");
-            query = query.setFirstResult(pageSize * (1 - 1));
-            query.setMaxResults(pageSize);
-
-
-            listOfEmployee = query.list();
-            // commit transaction
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-        System.out.println(listOfEmployee);
     }
 }
