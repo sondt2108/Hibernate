@@ -1,4 +1,4 @@
 dao\DepartmentDao.class
+models\Department.class
 controller\DepartmentController.class
 controller\EmployeeController.class
-models\Department.class

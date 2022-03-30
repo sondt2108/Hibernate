@@ -1,5 +1,8 @@
 package models;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Cache;
+
 import javax.persistence.Entity;
 
 import javax.persistence.*;
@@ -7,6 +10,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "employee")
+@Cacheable
+@Cache(usage= CacheConcurrencyStrategy.READ_ONLY)
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

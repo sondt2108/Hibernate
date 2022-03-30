@@ -1,9 +1,13 @@
 package models;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "departments")
+@Cacheable
+@org.hibernate.annotations.Cache(usage= CacheConcurrencyStrategy.READ_ONLY)
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -6,6 +6,11 @@
         </Console>
         <File name="LogToFile" fileName="logs/app-xml.log">
             <PatternLayout pattern="[%-5level] %d{dd-MM-yyyy HH:mm:ss} [%t] %c{1} - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="5MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
         </File>
     </Appenders>
     <Loggers>
