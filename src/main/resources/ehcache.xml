@@ -7,7 +7,7 @@
         <persistence strategy="localTempSwap" />
     </defaultCache>
 
-    <cache name="com.example.models.employee" maxEntriesLocalHeap="10000" eternal="false" timeToIdleSeconds="2" timeToLiveSeconds="10">
+    <cache name="com.example.models.employee" maxEntriesLocalHeap="10000" eternal="false" timeToIdleSeconds="20" timeToLiveSeconds="30">
         <persistence strategy="localTempSwap" />
     </cache>
 

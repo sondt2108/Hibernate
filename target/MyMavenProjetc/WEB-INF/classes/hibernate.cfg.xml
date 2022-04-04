@@ -18,9 +18,9 @@
         <property name="hbm2ddl.auto">update</property>
 
 
-        <property name="hibernate.c3p0.min_size">2</property>
+        <property name="hibernate.c3p0.min_size">5</property>
 <!--        số lượng kết nối tối thiểu được duy trì trong nhóm tại bất kỳ thời điểm nào.-->
-        <property name="hibernate.c3p0.max_size">3</property>
+        <property name="hibernate.c3p0.max_size">200</property>
 <!--        số lượng kết nối tối đa được duy trì trong nhóm tại bất kỳ thời điểm nào.-->
         <property name="hibernate.c3p0.timeout">180</property>
 <!--        số giây kết nối không hoạt động được giữ trong nhóm. Nếu một kết nối không hoạt động lâu hơn giá trị thời gian chờ này, thì nó sẽ được thay thế bằng một kết nối mới.-->
@@ -29,7 +29,9 @@
 
         <property name="hibernate.cache.use_second_level_cache" >true </property>
         <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory</property>
-        <property name="net.sf.ehcache.configurationResourceName">/ehcache.xml</property>
+        <property name="net.sf.ehcache.configurationResourceName">ehcache.xml</property>
+        <property name="cache.use_query_cache">true</property>
+
 
 
 

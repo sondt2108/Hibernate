@@ -140,7 +140,7 @@ public class EmployeeDao {
         cacheLv1Ex1();
 //        cacheLv2();
 //        mechanismCacheL2();
-        cacheManagement();
+//        cacheManagement();
     }
 
     public static void cacheLv1Ex1() {
