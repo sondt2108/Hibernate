@@ -137,10 +137,10 @@ public class EmployeeDao {
     }
 
     public static void main(String[] args) {
-        cacheLv1Ex1();
+        //cacheLv1Ex1();
 //        cacheLv2();
 //        mechanismCacheL2();
-//        cacheManagement();
+        cacheQuery();
     }
 
     public static void cacheLv1Ex1() {
@@ -239,37 +239,22 @@ public class EmployeeDao {
 //(6) : Tương tự, L1 Cache của session2 không chứa dữ liệu Category=2, nên nó tìm và truy xuất từ L2 Cache. Bây giờ: Hit=2, Put=2.
 
 
-    public static void cacheManagement() {
-        try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory(); Session session = sessionFactory.openSession(); Session session1 = sessionFactory.openSession();) {
 
 
-            Statistics statistics = sessionFactory.getStatistics();
-            logger.info("statistics enabled : " + statistics.isStatisticsEnabled());
-            statistics.setStatisticsEnabled(true);
-            logger.info("statistics enabled : " + statistics.isStatisticsEnabled());
-
-            printStatistics(statistics);
-
-            logger.info("--------------------1-------------------------");
-            Employee employee = session.get(Employee.class, 4);
-            logger.info("employee-------------------1 : " + employee.getFullName()); //get from database
-            printStatistics(statistics);
-
-            logger.info("--------------------2-------------------------");
-            Employee employee1 = session1.get(Employee.class, 4);
-            logger.info("employee-------------------2 : " + employee1.getFullName()); //get from L1 cache
-            printStatistics(statistics);
-
-            TimeUnit.SECONDS.sleep(3);
-
-            logger.info("--------------------5-------------------------");
-            Employee employee4 = session.get(Employee.class, 6);
-            logger.info("employee-------------------5 : " + employee4.getFullName()); //get from database
-            printStatistics(statistics);
+    public static void cacheQuery(){
+        try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory(); Session session = sessionFactory.openSession()) {
+            String hql = "from Employee e Where e.id = :id";
+            Query query = session.createQuery(hql);
+            query.setCacheable(true);
+            query.setCacheRegion(Employee.class.getCanonicalName());
+            query.setParameter("id", 4);
+            List result = query.list();
+            logger.info("--------------------------Query: " +result);
+            query.setParameter("id", 4);
+            result = query.list();
+            logger.info("--------------------------------Query 2:" + result);
 
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 
